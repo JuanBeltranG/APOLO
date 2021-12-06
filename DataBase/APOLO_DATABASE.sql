@@ -15,6 +15,8 @@ create table AgenteSeguros(
 );
 
 
+
+
 create table Contacto(
 
 	Id_Contacto int(3) not null auto_increment primary key,
@@ -23,6 +25,34 @@ create table Contacto(
 
 
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table Cita(
+
+	Id_
+
+
+
+);
+
+
+
+
+
+
+
+
 
 
 select * from AgenteSeguros;
