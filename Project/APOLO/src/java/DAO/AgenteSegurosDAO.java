@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class AgenteSegurosDAO {
     
     //Querys para el CRUD a la base de datos
-     private final String GuardaAgente = "{call GuardaAgente(?,?,?)}";
+     private final String GuardaAgente = "{call GuardaAgente(?,?,?,?)}";
      
      
      
@@ -44,6 +44,7 @@ public class AgenteSegurosDAO {
             st.setString(1, nuevoAgente.getNombre());
             st.setString(2, nuevoAgente.getCorreo());
             st.setString(3, nuevoAgente.getContra());
+            st.setString(4, nuevoAgente.getTelefono());
         
             rs = st.executeQuery();
             altaExitosa = true;

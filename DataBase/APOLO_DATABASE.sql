@@ -20,17 +20,18 @@ create table Contacto(
 	Id_Contacto int(3) not null auto_increment primary key,
     Id_Agente int(3),
     Nombre_Contacto varchar(60),
-    Correo_Electronico varchar(60),
+    ApellidoP_Contacto varchar(60),
+    ApellidoM_Contacto varchar(60),
+    Correo varchar(60),
     Direccion varchar(100),
     Telefono varchar(20),
     Edad int(3),
     Sexo varchar(20),
     Estado_Civil varchar(30),
-    Familia varchar(2),
     Polizas_Activas int(3),
     Antecedentes_Financieros varchar(1000),
-    Antecedentes_Financieros varchar(1000),
-    Antecedentes_Financieros varchar(1000),
+    Antecedentes_Penales varchar(1000),
+    Antecedentes_Medicos varchar(1000),
     foreign key (Id_Agente) references AgenteSeguros (Id_Agente)
     
 );
@@ -78,11 +79,11 @@ select * from AgenteSeguros;
 use APOLO;
 drop procedure if exists GuardaAgente;
 delimiter **
-create procedure GuardaAgente( in nombreAgen varchar(60), in correoAgen varchar(60), in contraAgen varchar(60))
+create procedure GuardaAgente( in nombreAgen varchar(60), in correoAgen varchar(60), in contraAgen varchar(60),in telefonoAgen varchar(60))
 begin
  
 
-INSERT INTO AgenteSeguros(Nombre_Agente, Email, Contra) 
-values(nombreAgen,correoAgen, contraAgen);
+INSERT INTO AgenteSeguros(Nombre_Agente, Email, Contra, Telefono ) 
+values(nombreAgen,correoAgen, contraAgen, telefonoAgen );
 
 end**

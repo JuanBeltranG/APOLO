@@ -58,15 +58,11 @@ public class UserRegister extends HttpServlet {
         String TelefonoAgente = request.getParameter("Telefono");
         
         
-        AgenteSeguros GuardaAgente = new AgenteSeguros(NombreAgente, CorreoAgente,ContraAgente);
+        AgenteSeguros GuardaAgente = new AgenteSeguros(NombreAgente, CorreoAgente,ContraAgente, TelefonoAgente);
         
         AgenteSegurosDAO metodosAgente = new AgenteSegurosDAO();
         
         metodosAgente.AltaAgente(GuardaAgente);
-        
-        
-        
-        
         
         
         

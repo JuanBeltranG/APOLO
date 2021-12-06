@@ -14,13 +14,26 @@ public class AgenteSeguros {
     private String Nombre;
     private String Correo;
     private String Contra;
+    private String Telefono;
 
-    public AgenteSeguros(String Nombre, String Correo, String Contra) {
+    public AgenteSeguros(String Nombre, String Correo, String Contra, String Telefono) {
         this.Nombre = Nombre;
         this.Correo = Correo;
         this.Contra = Contra;
+        this.Telefono = Telefono;
+    }
+    
+    
+    
+
+    public String getTelefono() {
+        return Telefono;
     }
 
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
+    
     public String getNombre() {
         return Nombre;
     }
