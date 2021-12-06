@@ -15,24 +15,23 @@ create table AgenteSeguros(
 );
 
 
-
-
 create table Contacto(
 
 	Id_Contacto int(3) not null auto_increment primary key,
     Id_Agente int(3),
     Nombre_Contacto varchar(60),
-    Correo_Electronico varchar(60),
+    ApellidoP_Contacto varchar(60),
+    ApellidoM_Contacto varchar(60),
+    Correo varchar(60),
     Direccion varchar(100),
     Telefono varchar(20),
     Edad int(3),
     Sexo varchar(20),
     Estado_Civil varchar(30),
-    Familia varchar(2),
     Polizas_Activas int(3),
     Antecedentes_Financieros varchar(1000),
-    Antecedentes_Financieros varchar(1000),
-    Antecedentes_Financieros varchar(1000),
+    Antecedentes_Penales varchar(1000),
+    Antecedentes_Medicos varchar(1000),
     foreign key (Id_Agente) references AgenteSeguros (Id_Agente)
     
 );
@@ -69,12 +68,7 @@ create table Ventas(
 );
 
 
-
-
 select * from AgenteSeguros;
-
-
-
 
 
 use APOLO;
@@ -88,3 +82,85 @@ INSERT INTO AgenteSeguros(Nombre_Agente, Email, Contra)
 values(nombreAgen,correoAgen, contraAgen);
 
 end**
+call GuardaAgente('Juan','juan&#x40;gmail.com','123')**
+select * from AgenteSeguros;
+
+drop procedure if exists GuardaContacto;
+delimiter **
+create procedure GuardaContacto(
+in CorreoA nvarchar(40),
+in NombreC varchar(30),
+in ApellidoPC varchar(30),
+in ApellidoMC varchar(30),
+in CorreoC varchar(60),
+in DireccionC varchar(500), 
+in TelefonoC int(10), 
+in EdadC int(3),
+in SexoC varchar(30),
+in Estado_CivilC varchar(100),
+in PolizasA int(3),
+in AntecedentesFinancieros nvarchar(1000), 
+in AntecedentesPenales nvarchar(1000), 
+in AntecedentesMedicos nvarchar(1000))
+begin
+declare existe int;
+declare existeA int;
+declare idA int;
+declare mjs nvarchar(50);
+declare idper int;
+	set idA = (select Id_Agente from AgenteSeguros where Email = CorreoA );
+	set existe = (select count(*) from Contacto where correo = CorreoC );
+    set existeA = (select count(*) from AgenteSeguros where Email = CorreoA );
+	set idper = (select Id_Contacto from Contacto where correo = CorreoC);  
+			if(existe = 0)then
+				if(existeA > 0)then
+					INSERT INTO Contacto(Id_Agente,Nombre_Contacto,ApellidoP_Contacto,ApellidoM_Contacto,Correo,Direccion,Telefono,Edad,Sexo,Estado_Civil,Polizas_Activas,Antecedentes_Financieros,Antecedentes_Penales,Antecedentes_Medicos) 
+					values (idA,NombreC,ApellidoPC,ApellidoMC,CorreoC,DireccionC,TelefonoC,EdadC,SexoC,Estado_CivilC,PolizasA,AntecedentesFinancieros,AntecedentesPenales,AntecedentesMedicos);
+                    set mjs = 'Persona registrada';
+                else
+					set mjs = 'El agente no existe en la base';
+                end if;
+            else 
+            set mjs = 'Persona ya registrada';
+            end if;
+select idper as usuario, mjs as mensaje;
+end**
+select * from Contacto**
+call GuardaContacto('juan&#x40;gmail.com','Rodrigo','Lopez','Lopez','a&#x40;gmail.com','Calle 1',5555555,10,'Masculino','Casado',4,'Nada','Nada','Nada')**
+
+drop procedure if exists ActualizaContacto;
+delimiter **
+create procedure ActualizaContacto(
+in Id_A nvarchar(40),
+in Id_C varchar(30),
+in NombreC varchar(30),
+in ApellidoPC varchar(30),
+in ApellidoMC varchar(30),
+in EdadC int(3),
+in SexoC varchar(30),
+in CorreoC varchar(60),
+in DireccionC varchar(500), 
+in TelefonoC int(10), 
+in PolizasA int(3),
+in Estado_CivilC varchar(100),
+in AntecedentesFinancieros nvarchar(1000), 
+in AntecedentesPenales nvarchar(1000), 
+in AntecedentesMedicos nvarchar(1000))
+begin
+declare existe int;
+declare mjs nvarchar(50);
+declare idper int;
+	set existe = (select count(*) from Contacto where correo = CorreoC );
+	set idper = (select Id_Contacto from Contacto where correo = CorreoC); 
+		if(id = 'actualiza')then
+			if(existe != 0)then
+			update Contacto set  Nombre = NombreC, ApellidoP_Contacto = ApellidoPC,ApellidoM_Contacto = ApellidoMC, Edad = EdadC , Sexo = SexoC ,Correo = CorreoC, Direccion= DireccionC, Telefono = TelefonoC, Estado_Civil=Estado_CivilC, Polizas_Activas= PolizasA,Antecedentes_Financieros = AntecedentesFinancieros,Antecedentes_Penales = AntecedentesPenales,Antecedentes_Medicos = AntecedentesMedicos
+			where Id_Contacto = idper;
+			set mjs = 'Contacto actualizada';
+            else
+				set mjs ='Contacto no registrado';
+            end if;
+        end if;
+select idper as usuario, mjs as mensaje;
+end**
+select * from Contacto**
