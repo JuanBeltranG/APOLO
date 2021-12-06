@@ -15,8 +15,6 @@ create table AgenteSeguros(
 );
 
 
-
-
 create table Contacto(
 
 	Id_Contacto int(3) not null auto_increment primary key,

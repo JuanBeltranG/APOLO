@@ -55,6 +55,8 @@ public class UserRegister extends HttpServlet {
         String NombreAgente= request.getParameter("Nombre"); 
         String CorreoAgente= request.getParameter("Correo"); 
         String ContraAgente= request.getParameter("Contra"); 
+        String TelefonoAgente = request.getParameter("Telefono");
+        
         
         AgenteSeguros GuardaAgente = new AgenteSeguros(NombreAgente, CorreoAgente,ContraAgente);
         
